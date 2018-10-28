@@ -10,7 +10,28 @@ using System.Threading.Tasks;
 
 namespace Engine.GameEngine
 {
-    class GameObject
+    public class GameObject
     {
+        // We want delegates and events to allow us to use the Loops and Draws without having to override any events
+        public delegate void OnAwake(GameObject self); // When the object has first been created in the scene
+        public delegate void OnLoopBegin(GameObject self); // Triggers at the very start of the loop
+        public delegate void OnLoop(GameObject self); // Triggers every loop
+        public delegate void OnLoopEnd(GameObject self); // Triggers at the end of every loop
+        public delegate void OnDraw(GameObject self); // When the object is running the draw event
+
+        // The events that we can call in our main loop/draw methods
+        public event OnAwake Awake;
+        public event OnLoopBegin LoopBegin;
+        public event OnLoop Loop;
+        public event OnLoopEnd LoopEnd;
+        public event OnDraw Draw;
+
+        // Some variables
+
+
+        public GameObject()
+        {
+
+        }
     }
 }
