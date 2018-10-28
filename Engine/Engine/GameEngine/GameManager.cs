@@ -1,5 +1,5 @@
 ﻿/*
- * The main class for managing our scenes, game play, resource loading etc
+ * The main class for managing our Scene Manager, game play elements, resource loading etc
  */
 using System;
 using System.Collections.Generic;
