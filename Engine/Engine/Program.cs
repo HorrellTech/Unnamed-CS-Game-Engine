@@ -17,8 +17,9 @@ namespace Engine
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var win = new GLGameWindow(640, 480, "Test game");
-            win.Show();
+            Application.Run(new Form1());
+            //var win = new GLGameWindow(640, 480, "Test game");
+            //win.Show();
         }
     }
 }
