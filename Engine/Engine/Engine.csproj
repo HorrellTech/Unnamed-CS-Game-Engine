@@ -36,6 +36,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="OpenTK.GLControl">
+      <HintPath>..\..\..\..\..\source\repos\opentk test\packages\OpenTK.GLControl.3.0.1\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,7 +60,10 @@
     </Compile>
     <Compile Include="GameEngine\GameManager.cs" />
     <Compile Include="GameEngine\GameObject.cs" />
-    <Compile Include="GameEngine\GameWindow.cs" />
+    <Compile Include="GameEngine\GLGameCanvas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameEngine\GLGameWindow.cs" />
     <Compile Include="GameEngine\Scene.cs" />
     <Compile Include="GameEngine\SceneManager.cs" />
     <Compile Include="Program.cs" />

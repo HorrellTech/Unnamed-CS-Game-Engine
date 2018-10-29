@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Engine.GameEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ namespace Engine
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var win = new GLGameWindow(640, 480, "Test game");
+            win.Show();
         }
     }
 }

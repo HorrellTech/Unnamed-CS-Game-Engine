@@ -1,16 +1,17 @@
-﻿using System;
+﻿using OpenTK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenTK;
 
 namespace Engine.GameEngine
 {
-    public class GameWindow : OpenTK.GameWindow
+    public class GLGameCanvas : GLControl
     {
 
-        public GameWindow()
+        public GLGameCanvas()
+            :base(OpenTK.Graphics.GraphicsMode.Default)
         {
 
         }
