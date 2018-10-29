@@ -18,6 +18,7 @@ namespace Engine.GameEngine
         public delegate void _OnLoop(GameObject self); // Triggers every loop
         public delegate void _OnLoopEnd(GameObject self); // Triggers at the end of every loop
         public delegate void _OnDraw(GameObject self); // When the object is running the draw event
+        public delegate void _OnDrawGui(GameObject self); // When the object is running the draw event overtop of all other drawing methods
 
         // The events that we can call in our main loop/draw methods
         public event _OnAwake OnAwake;
@@ -25,6 +26,7 @@ namespace Engine.GameEngine
         public event _OnLoop OnLoop;
         public event _OnLoopEnd OnLoopEnd;
         public event _OnDraw OnDraw;
+        public event _OnDrawGui OnDrawGui;
 
         // Internal private variables
         private bool _hasAwoken; // We want to keep track of whether the object has woken or not, and if so, then perform the awake event
@@ -36,6 +38,8 @@ namespace Engine.GameEngine
         private float bboxRight; // The Right position of the bounding box
         private float bboxTop; // The Top position of the bounding box
         private float bboxBottom; // The Bottom position of the bounding box
+
+        private List<GameObject> instances = new List<GameObject>(); // Hold a list of the instances of this parent object
 
         public GameObject()
         {
@@ -102,6 +106,34 @@ namespace Engine.GameEngine
             {
                 OnDraw(this);
             }
+        }
+
+        /// <summary>
+        /// Hande the draw GUI event
+        /// </summary>
+        public void DrawGui()
+        {
+            if (OnDrawGui != null)
+            {
+                OnDrawGui(this);
+            }
+        }
+
+        /// <summary>
+        /// Create a new instance of this object and store it into the instances list, also return the object for direct access to it
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public GameObject InstanceCreate(float x, float y)
+        {
+            var ob = new GameObject();
+            ob.x = x;
+            ob.y = y;
+
+            instances.Add(ob);
+
+            return (ob);
         }
     }
 }
