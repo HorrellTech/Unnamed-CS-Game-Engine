@@ -149,7 +149,18 @@ namespace Engine.GameEngine
         /// </summary>
         public void InstanceDestroy()
         {
+            if(_parentObject != null)
+            {
+                _parentObject.instances.Remove(this);
+            }
+        }
 
+        /// <summary>
+        /// Return the list of instances
+        /// </summary>
+        public List<GameObject> GetInstances
+        {
+            get { return (instances); }
         }
     }
 }
