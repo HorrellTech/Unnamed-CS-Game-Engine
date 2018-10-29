@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="GameEngine\GameManager.cs" />
     <Compile Include="GameEngine\GameObject.cs" />
+    <Compile Include="GameEngine\Math\Vector2.cs" />
     <Compile Include="GameEngine\Scene.cs" />
     <Compile Include="GameEngine\SceneManager.cs" />
     <Compile Include="Program.cs" />
