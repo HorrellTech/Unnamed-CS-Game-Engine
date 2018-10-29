@@ -30,6 +30,7 @@ namespace Engine.GameEngine
 
         // Internal private variables
         private bool _hasAwoken; // We want to keep track of whether the object has woken or not, and if so, then perform the awake event
+        private GameObject _parentObject; // The object that will have this object in its instances list
 
         // Some variables
         private float x; // The X position
@@ -38,6 +39,8 @@ namespace Engine.GameEngine
         private float bboxRight; // The Right position of the bounding box
         private float bboxTop; // The Top position of the bounding box
         private float bboxBottom; // The Bottom position of the bounding box
+        private bool visible; // If the object should be drawn or not
+        private bool active; // If the object is active. If not, then do not perform ANY events
 
         private List<GameObject> instances = new List<GameObject>(); // Hold a list of the instances of this parent object
 
@@ -52,6 +55,7 @@ namespace Engine.GameEngine
             bboxBottom = 0;
 
             _hasAwoken = false;
+            _parentObject = null;
         }
 
         /// <summary>
@@ -102,9 +106,12 @@ namespace Engine.GameEngine
         /// </summary>
         public void Draw()
         {
-            if (OnDraw != null)
+            if (visible)
             {
-                OnDraw(this);
+                if (OnDraw != null)
+                {
+                    OnDraw(this);
+                }
             }
         }
 
@@ -130,10 +137,19 @@ namespace Engine.GameEngine
             var ob = new GameObject();
             ob.x = x;
             ob.y = y;
+            ob._parentObject = this;
 
             instances.Add(ob);
 
             return (ob);
+        }
+
+        /// <summary>
+        /// Remove this instance from the parent game object and from memory
+        /// </summary>
+        public void InstanceDestroy()
+        {
+
         }
     }
 }
