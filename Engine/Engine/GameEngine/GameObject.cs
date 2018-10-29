@@ -13,18 +13,21 @@ namespace Engine.GameEngine
     public class GameObject
     {
         // We want delegates and events to allow us to use the Loops and Draws without having to override any events
-        public delegate void OnAwake(GameObject self); // When the object has first been created in the scene
-        public delegate void OnLoopBegin(GameObject self); // Triggers at the very start of the loop
-        public delegate void OnLoop(GameObject self); // Triggers every loop
-        public delegate void OnLoopEnd(GameObject self); // Triggers at the end of every loop
-        public delegate void OnDraw(GameObject self); // When the object is running the draw event
+        public delegate void _OnAwake(GameObject self); // When the object has first been created in the scene
+        public delegate void _OnLoopBegin(GameObject self); // Triggers at the very start of the loop
+        public delegate void _OnLoop(GameObject self); // Triggers every loop
+        public delegate void _OnLoopEnd(GameObject self); // Triggers at the end of every loop
+        public delegate void _OnDraw(GameObject self); // When the object is running the draw event
 
         // The events that we can call in our main loop/draw methods
-        public event OnAwake Awake;
-        public event OnLoopBegin LoopBegin;
-        public event OnLoop Loop;
-        public event OnLoopEnd LoopEnd;
-        public event OnDraw Draw;
+        public event _OnAwake OnAwake;
+        public event _OnLoopBegin OnLoopBegin;
+        public event _OnLoop OnLoop;
+        public event _OnLoopEnd OnLoopEnd;
+        public event _OnDraw OnDraw;
+
+        // Internal private variables
+        private bool _hasAwoken; // We want to keep track of whether the object has woken or not, and if so, then perform the awake event
 
         // Some variables
         private float x; // The X position
@@ -36,7 +39,69 @@ namespace Engine.GameEngine
 
         public GameObject()
         {
+            x = 0;
+            y = 0;
+            // The bounding box variables will generally be set from a sprite
+            bboxLeft = 0;
+            bboxRight = 0;
+            bboxTop = 0;
+            bboxBottom = 0;
 
+            _hasAwoken = false;
+        }
+
+        /// <summary>
+        /// Handle the awake event
+        /// </summary>
+        public void Awake()
+        {
+            if(OnAwake != null)
+            {
+                OnAwake(this);
+            }
+
+            _hasAwoken = true;
+        }
+        
+        /// <summary>
+        /// Handle the main loop event
+        /// </summary>
+        public void Loop()
+        {
+            // Perform the awake event
+            if(!_hasAwoken)
+            {
+                Awake();
+            }
+
+            // The beginnng of the main loop
+            if (OnLoopBegin != null)
+            {
+                OnLoopBegin(this);
+            }
+
+            // The main loop
+            if (OnLoop != null)
+            {
+                OnLoop(this);
+            }
+
+            // The end of the main loop
+            if (OnLoopEnd != null)
+            {
+                OnLoopEnd(this);
+            }
+        }
+
+        /// <summary>
+        /// Hande the draw event
+        /// </summary>
+        public void Draw()
+        {
+            if (OnDraw != null)
+            {
+                OnDraw(this);
+            }
         }
     }
 }
