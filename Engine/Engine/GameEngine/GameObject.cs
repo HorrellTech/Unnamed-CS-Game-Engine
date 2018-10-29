@@ -27,7 +27,12 @@ namespace Engine.GameEngine
         public event OnDraw Draw;
 
         // Some variables
-
+        private float x; // The X position
+        private float y; // The Y position
+        private float bboxLeft; // The Left position of the bounding box
+        private float bboxRight; // The Right position of the bounding box
+        private float bboxTop; // The Top position of the bounding box
+        private float bboxBottom; // The Bottom position of the bounding box
 
         public GameObject()
         {
