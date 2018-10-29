@@ -162,5 +162,14 @@ namespace Engine.GameEngine
         {
             get { return (instances); }
         }
+
+        /// <summary>
+        /// Get or set whether the object is active or not
+        /// </summary>
+        public bool Active
+        {
+            get { return (active); }
+            set { active = value; }
+        }
     }
 }
