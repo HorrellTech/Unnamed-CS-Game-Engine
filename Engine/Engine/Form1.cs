@@ -15,6 +15,14 @@ namespace Engine
         public Form1()
         {
             InitializeComponent();
+
+            glGameCanvas1.OnDraw += GlGameCanvas1_OnDraw;
+        }
+        int x = 0;
+        private void GlGameCanvas1_OnDraw(object sender, PaintEventArgs e)
+        {
+            x++;
+            e.Graphics.FillRectangle(Brushes.Red, x, 0, 64, 64);
         }
     }
 }

@@ -37,7 +37,7 @@
             this.glGameCanvas1.Location = new System.Drawing.Point(13, 13);
             this.glGameCanvas1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.glGameCanvas1.Name = "glGameCanvas1";
-            this.glGameCanvas1.Size = new System.Drawing.Size(448, 333);
+            this.glGameCanvas1.Size = new System.Drawing.Size(588, 462);
             this.glGameCanvas1.TabIndex = 0;
             this.glGameCanvas1.VSync = false;
             // 

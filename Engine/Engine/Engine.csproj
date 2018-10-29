@@ -66,6 +66,7 @@
     <Compile Include="GameEngine\GLGameWindow.cs" />
     <Compile Include="GameEngine\Scene.cs" />
     <Compile Include="GameEngine\SceneManager.cs" />
+    <Compile Include="GameEngine\Shaders.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
