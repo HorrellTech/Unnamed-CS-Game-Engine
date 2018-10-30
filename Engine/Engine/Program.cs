@@ -4,22 +4,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SDL2;
+using System.Runtime.InteropServices;
 
 namespace Engine
 {
     static class Program
     {
+        //Screen dimension constants
+        private const int SCREEN_WIDTH = 640;
+        private const int SCREEN_HEIGHT = 480;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            //var win = new GLGameWindow(640, 480, "Test game");
-            //win.Show();
+            //The window we'll be rendering to
+            var window = IntPtr.Zero;
+
+            //Initialize SDL
+            if (SDL.SDL_Init(SDL.SDL_INIT_VIDEO) < 0)
+            {
+                Console.WriteLine("SDL could not initialize! SDL_Error: {0}", SDL.SDL_GetError());
+            }
+            else
+            {
+                //Create window
+                window = SDL.SDL_CreateWindow("SDL Tutorial", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
+                if (window == IntPtr.Zero)
+                {
+                    Console.WriteLine("Window could not be created! SDL_Error: {0}", SDL.SDL_GetError());
+                }
+                else
+                {
+                    //Get window surface
+                    var myscreenSurface = SDL.SDL_GetWindowSurface(window);
+
+                    //The surface contained by the window
+                    var screenSurface = Marshal.PtrToStructure<SDL.SDL_Surface>(myscreenSurface);
+
+                    //Fill the surface white
+                    SDL.SDL_FillRect(myscreenSurface, IntPtr.Zero, SDL.SDL_MapRGB(screenSurface.format, 0xFF, 0xFF, 0xFF));
+
+                    //Update the surface
+                    SDL.SDL_UpdateWindowSurface(window);
+
+                    //Wait two seconds
+                    SDL.SDL_Delay(5000);
+                }
+            }
+
+            //Destroy window
+            SDL.SDL_DestroyWindow(window);
+
+            //Quit SDL subsystems
+            SDL.SDL_Quit();
         }
     }
 }
