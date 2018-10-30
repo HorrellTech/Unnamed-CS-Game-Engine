@@ -72,8 +72,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameEngine\Colors.cs" />
     <Compile Include="GameEngine\GameManager.cs" />
     <Compile Include="GameEngine\GameObject.cs" />
+    <Compile Include="GameEngine\MathHelper.cs" />
+    <Compile Include="GameEngine\Renderer.cs" />
     <Compile Include="GameEngine\Scene.cs" />
     <Compile Include="GameEngine\SceneManager.cs" />
     <Compile Include="GameEngine\Shaders.cs" />
