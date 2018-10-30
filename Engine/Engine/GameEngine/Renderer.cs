@@ -61,6 +61,11 @@ namespace Engine.GameEngine
         public void DrawSetAlpha(byte alpha)
         {
             this.alpha = alpha;
+            var r = color.R;
+            var g = color.G;
+            var b = color.B;
+
+            color = new Color(r, g, b, alpha);
         }
 
         /// <summary>

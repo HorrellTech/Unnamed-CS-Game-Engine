@@ -13,22 +13,29 @@ namespace Engine
 {
     static class Program
     {
+        private static uint windowWidth = 640;
+        private static uint windowHeight = 480;
+        private static uint windowDepth = 32;
         private static RenderWindow window;
         private static Renderer renderer; // The game renderer for testing
         private static ContextSettings settings = new ContextSettings(); // Settings for the drawing (antialiasing etc)
-        private static bool autoResize = true; // If the drawing resolution should resize to fit the window
+        private static bool autoResize = false; // If the drawing resolution should resize to fit the window
 
         /// <summary>
-        /// The main entry point for the application.
+        /// The main entry point for the application.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         /// </summary>
         static void Main(string[] args)
         {
             // SET THE SETTINGS HERE
-            settings.AntialiasingLevel = 8;
+            settings.DepthBits = 24;
+            settings.StencilBits = 8;
+            settings.AntialiasingLevel = 4;
+            settings.MajorVersion = 3;
+            settings.MinorVersion = 0;
 
-            window = new RenderWindow(new SFML.Window.VideoMode(800, 600), "Unnamed Game Engine", Styles.Default, settings); // Create a new game window
-            renderer = new Renderer(window);
-            window.SetVerticalSyncEnabled(true);
+            window = new RenderWindow(new SFML.Window.VideoMode(windowWidth, windowHeight, windowDepth), "Unnamed Game Engine", Styles.Default, settings); // Create a new game window
+            renderer = new Renderer(window); // Create the renderer
+            window.SetVerticalSyncEnabled(true); // Vertical Sync
 
             window.Closed += WinClosed;
             window.Resized += WinResized;
@@ -37,7 +44,7 @@ namespace Engine
             while (window.IsOpen)
             {
                 window.DispatchEvents();
-                window.Clear(Color.Black); // Clear the screen
+                window.Clear(Colors.Black); // Clear the screen
 
                 // DO LOOP AND DRAWING HERE
 
@@ -45,7 +52,11 @@ namespace Engine
 
                 renderer.DrawSetAlpha(0xFF);
                 renderer.DrawSetColor(Color.Red);
-                renderer.DrawRectangle(32, 32, 64, 64, false);
+                renderer.DrawRectangle(32, 32, 128, 128, false); // Draw a simple rectangle
+
+                renderer.DrawSetColor(renderer.RGB(0x00, 0x00, 0xFF));
+                renderer.DrawSetAlpha(0xAA);
+                renderer.DrawLine(0, 0, 300, 300); // Draw a simple line with alpha transparency at half
 
                 window.Display();
             }
@@ -59,7 +70,7 @@ namespace Engine
 
         private static void WinResized(object sender, SizeEventArgs e)
         {
-            if (autoResize)
+            if (autoResize) // If the autoResize resoultion is set to true
             {
                 window.SetView(new SFML.Graphics.View(new FloatRect(0, 0, e.Width, e.Height))); // Reset the game resolution
             }
