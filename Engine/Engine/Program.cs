@@ -21,6 +21,9 @@ namespace Engine
         private static ContextSettings settings = new ContextSettings(); // Settings for the drawing (antialiasing etc)
         private static bool autoResize = false; // If the drawing resolution should resize to fit the window
 
+        private static Clock clock = new Clock(); // For calculating FPS
+        private static float fps = 0;
+
         /// <summary>
         /// The main entry point for the application.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         /// </summary>
@@ -40,6 +43,7 @@ namespace Engine
             window.Closed += WinClosed;
             window.Resized += WinResized;
 
+            float lastTime = 0.0f; // The last calculated time
             // Main game loop
             while (window.IsOpen)
             {
@@ -49,16 +53,18 @@ namespace Engine
                 // DO LOOP AND DRAWING HERE
 
                 // Draw a basic line
+                
 
-                renderer.DrawSetAlpha(0xFF);
-                renderer.DrawSetColor(Color.Red);
-                renderer.DrawRectangle(32, 32, 128, 128, false); // Draw a simple rectangle
-
-                renderer.DrawSetColor(renderer.RGB(0x00, 0x00, 0xFF));
-                renderer.DrawSetAlpha(0xAA);
-                renderer.DrawLine(0, 0, 300, 300); // Draw a simple line with alpha transparency at half
-
+                // Everything before here needs to be rendered
                 window.Display();
+
+                // Calculate FPS
+                float currentTime = clock.Restart().AsSeconds();
+                fps = 1.0f / lastTime;// (currentTime - lastTime);
+                lastTime = currentTime;
+
+                // Set the title with the frames per second
+                window.SetTitle("Unnamed Game Engine (FPS: " + ((int)fps).ToString() + ")");
             }
         }
 
