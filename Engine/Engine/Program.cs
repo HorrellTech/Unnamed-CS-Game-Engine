@@ -53,7 +53,8 @@ namespace Engine
                 // DO LOOP AND DRAWING HERE
 
                 // Draw a basic line
-                
+                renderer.DrawSetColor(Color.Red);
+                renderer.DrawRectangle(64, 32, 64 + 32, 32 + 32, false);
 
                 // Everything before here needs to be rendered
                 window.Display();

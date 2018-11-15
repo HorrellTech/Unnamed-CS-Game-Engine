@@ -2,6 +2,8 @@
  * The Scene class will keep track of the Game Objects contained in it, 
  * with cameras/views, dimentions
  */
+using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +14,31 @@ namespace Engine.GameEngine
 {
     public class Scene
     {
+        private const int VIEWCOUNT = 10;
+
         private List<GameObject> objects = new List<GameObject>(); // Hold a list of all the objects in the scene
 
         // Variables
         private float width; // The width of the scene in pixels
         private float height; // The height of the scene in pixels
-        private float viewX; // The X position of the main view
-        private float viewY; // The Y position of the main view
-        private float viewW; // The width of the main view
-        private float viewH; // The height of the main view
+        private View[] views; // Store the views in the current scene
 
         /// <summary>
-        /// Constructor for the scene
+        /// Constructor for the scene, set the width and height of the scene
         /// </summary>
-        public Scene()
+        public Scene(float width, float height, float viewCenterX, float viewCenterY, float viewWidth, float viewHeight)
         {
+            views = new View[VIEWCOUNT]; // Initialize the views
 
+            this.width = width;
+            this.height = height;
+
+            views[0] = new View(new Vector2f(viewCenterX, viewCenterY), new Vector2f(viewWidth, viewHeight)); // Create the first view
+
+            for(var i = 1; i < VIEWCOUNT; i++)
+            {
+                views[i] = new View();
+            }
         }
 
         /// <summary>
