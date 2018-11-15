@@ -48,12 +48,12 @@ namespace Engine
             while (window.IsOpen)
             {
                 window.DispatchEvents();
-                window.Clear(Colors.Black); // Clear the screen
+                window.Clear(); // Clear the screen
 
                 // DO LOOP AND DRAWING HERE
 
-                // Draw a basic line
-                renderer.DrawSetColor(Color.Red);
+                // Draw a basic orange line
+                renderer.DrawSetColor(Colors.RGB(1.0f, 0.5f, 0));
                 renderer.DrawRectangle(64, 32, 64 + 32, 32 + 32, false);
 
                 // Everything before here needs to be rendered
