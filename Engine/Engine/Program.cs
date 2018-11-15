@@ -44,6 +44,7 @@ namespace Engine
             window.Resized += WinResized;
 
             float lastTime = 0.0f; // The last calculated time
+
             // Main game loop
             while (window.IsOpen)
             {
