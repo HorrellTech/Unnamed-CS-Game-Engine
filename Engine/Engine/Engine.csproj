@@ -80,6 +80,7 @@
     <Compile Include="GameEngine\Scene.cs" />
     <Compile Include="GameEngine\SceneManager.cs" />
     <Compile Include="GameEngine\Shaders.cs" />
+    <Compile Include="GameEngine\Structs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
